@@ -1,8 +1,8 @@
 # 레이싱카 프로젝트
 
 ## 기능 목록
-- [ ] 각 라운드별로 자동차들의 위치가 변한다. => 핵심 비즈니스
-  - [ ] 위치가 변하는 기준은 `pickNumberInRange()`을 돌렸을 때 0~9 중 값이 4 이상일 때 움직인다.
+- [x] 각 라운드별로 자동차들의 위치가 변한다. => 핵심 비즈니스
+  - [x] 위치가 변하는 기준은 `pickNumberInRange()`을 돌렸을 때 0~9 중 값이 4 이상일 때 움직인다.
 - [ ] 마지막 결과물을 보고 최종 우승자가 누구누구인지 판별한다.
 - [ ] 입력받은 자동차의 이름을 분리한다.
   - [ ] 쉼표를 기준으로 공백은 자동으로 제거해준다.
@@ -20,22 +20,30 @@
    - int position
 2. behavior
    - void validateName(String name)
+   - CarInfo playOneRound(int round)
    - boolean ifMoved()
-   - SingleRoundPosition getPosition()
+   - CarInfo generateCarInfo(int round)
+
+### CarInfo
+1. status
+   - String name
+   - int currentPosition
+   - int currentRound
+2. behavior
 
 ### SingleRoundPosition
 1. status
    - Map<String, Integer> carsPositions
-   - List<String> carNames
 2. behavior
    - int getPosition(String carName)
+   - void writeNewCarPosition(String carName, int position)
 
 ### ResultPosition
 1. status
    - Map<Integer, SingleRoundPosition> positionsPerRound
 2. behavior
    - SingleRoundPosition getPositionsForRound(int round)
-   - void addNewPositions(SingleRoundPosition position, int round)
+   - void addNewPositions(CarInfo carInfo)
    - int getCurrentRound()
 
 ### WinnersCalculator
@@ -48,8 +56,8 @@
    - ResultPosition positions
    - int finalRound
 2. behavior
-   - void writePosition(SingleRoundPosition position, int round)
-   - ResultPosition getFinalPositions()
+   - void writePosition(CarInfo carInfo)
+   - ResultPosition getAllPositions()
    - boolean isFinalRound()
 
 ### CarNames
