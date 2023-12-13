@@ -3,7 +3,7 @@
 ## 기능 목록
 - [x] 각 라운드별로 자동차들의 위치가 변한다. => 핵심 비즈니스
   - [x] 위치가 변하는 기준은 `pickNumberInRange()`을 돌렸을 때 0~9 중 값이 4 이상일 때 움직인다.
-- [ ] 마지막 결과물을 보고 최종 우승자가 누구누구인지 판별한다.
+- [x] 마지막 결과물을 보고 최종 우승자가 누구누구인지 판별한다.
 - [ ] 입력받은 자동차의 이름을 분리한다.
   - [ ] 쉼표를 기준으로 공백은 자동으로 제거해준다.
 - [ ] 분리한 자동차 이름을 검증한다.
@@ -36,15 +36,16 @@
    - Map<String, Integer> carsPositions
 2. behavior
    - int getPosition(String carName)
+   - List<String> getCarNames()
    - void writeNewCarPosition(String carName, int position)
 
 ### ResultPosition
 1. status
    - Map<Integer, SingleRoundPosition> positionsPerRound
 2. behavior
-   - SingleRoundPosition getPositionsForRound(int round)
+   - SingleRoundPosition getPositionsByRound(int round)
    - void addNewPositions(CarInfo carInfo)
-   - int getCurrentRound()
+   - boolean isThisRound(int round)
 
 ### WinnersCalculator
 1. status

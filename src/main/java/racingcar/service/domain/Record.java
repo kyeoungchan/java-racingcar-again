@@ -4,11 +4,12 @@ import racingcar.vo.CarInfo;
 import racingcar.vo.ResultPosition;
 
 public class Record {
-    private final ResultPosition positions = new ResultPosition();
+    private final ResultPosition positions;
     private final int finalRound;
 
     public Record(int finalRound) {
         this.finalRound = finalRound;
+        positions = new ResultPosition();
     }
 
     public void writePosition(CarInfo carInfo) {
