@@ -12,6 +12,13 @@ public class ResultPosition {
         SingleRoundPosition singleRound =
                 positionsPerRound.getOrDefault(round, new SingleRoundPosition());
         singleRound.writeNewCarPosition(carInfo.name(), carInfo.currentPosition());
+        appendNewRound(round, singleRound);
+    }
+
+    private void appendNewRound(int round, SingleRoundPosition singleRound) {
+        if (!positionsPerRound.containsKey(round)) {
+            positionsPerRound.put(round, singleRound);
+        }
     }
 
     public boolean isThisRound(int round) {
