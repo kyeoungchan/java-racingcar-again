@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import racingcar.utils.consts.ExceptionMessage;
 import racingcar.utils.exception.IllegalArgumentExceptionCaller;
+import racingcar.utils.exception.InternalExceptionCaller;
 
 public class SingleRoundPosition {
     private final Map<String, Integer> carPositions = new LinkedHashMap<>();
@@ -20,7 +21,7 @@ public class SingleRoundPosition {
 
     public int getPosition(String carName) {
         if (!carPositions.containsKey(carName)) {
-            throw IllegalArgumentExceptionCaller.call(String.format(ExceptionMessage.NOT_EXISTING_ROUND.getMessage(), carName));
+            throw InternalExceptionCaller.call(String.format(ExceptionMessage.NOT_EXISTING_ROUND.getMessage(), carName));
         }
         return carPositions.get(carName);
     }

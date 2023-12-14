@@ -2,7 +2,7 @@ package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
-import racingcar.view.validator.InputValidator;
+import racingcar.validator.InputValidator;
 
 public class InputView {
     private final OutputView outputView;

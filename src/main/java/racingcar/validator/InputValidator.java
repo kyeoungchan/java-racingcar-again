@@ -1,4 +1,4 @@
-package racingcar.view.validator;
+package racingcar.validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +16,7 @@ public class InputValidator {
         validateIfEndByComma(carNamesData);
         return Arrays.stream(carNamesData.split(PatternRegex.SPLITTER.getValue()))
                 .map(String::trim)
+                .peek(this::validateBlank)
                 .collect(Collectors.toList());
     }
 
@@ -24,6 +25,12 @@ public class InputValidator {
         Matcher m = p.matcher(carNamesData);
         if (m.matches()) {
             throw InputExceptionCaller.call(ExceptionMessage.INPUT_THINGS_AFTER_COMMA.getMessage());
+        }
+    }
+
+    private void validateBlank(String carName) {
+        if (carName == null || carName.length() == 0) {
+            throw InputExceptionCaller.call(ExceptionMessage.BLANK.getMessage());
         }
     }
 }
