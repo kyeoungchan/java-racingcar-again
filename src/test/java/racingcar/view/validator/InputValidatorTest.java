@@ -5,7 +5,9 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import racingcar.utils.consts.ExceptionMessage;
 import racingcar.validator.InputValidator;
 
@@ -49,6 +51,42 @@ class InputValidatorTest {
                 .hasMessageContaining(ExceptionMessage.INPUT_ERROR.getMessage());
         assertThatThrownBy(() -> inputValidator.parseToStrings(namesData))
                 .hasMessageContaining(ExceptionMessage.BLANK.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, 0", "1, 1", "2, 2", "9999, 9999", "9999999, 9999999"})
+    @DisplayName("숫자로 입력한다면 InputValidator 는 예외를 발생시키지 않는다.")
+    void parseToInt(String roundData, int value) {
+        assertThat(inputValidator.parseToInt(roundData))
+                .isEqualTo(value);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("공백을 입력하면 예외가 발생한다.")
+    void validateEmptyRound(String roundData) {
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .hasMessageContaining(ExceptionMessage.PREFIX.getMessage());
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .hasMessageContaining(ExceptionMessage.INPUT_ERROR.getMessage());
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .hasMessageContaining(ExceptionMessage.BLANK.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"abc", "가나다", "9숫자"})
+    @DisplayName("공백을 입력하거나 숫자가 아닌 값을 입력하면 예외가 발생한다.")
+    void validateNotNumberRound(String roundData) {
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .hasMessageContaining(ExceptionMessage.PREFIX.getMessage());
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .hasMessageContaining(ExceptionMessage.INPUT_ERROR.getMessage());
+        assertThatThrownBy(() -> inputValidator.parseToInt(roundData))
+                .hasMessageContaining(ExceptionMessage.INPUT_ONLY_NUMBER.getMessage());
     }
 
     private static Stream<Arguments> generateData() {

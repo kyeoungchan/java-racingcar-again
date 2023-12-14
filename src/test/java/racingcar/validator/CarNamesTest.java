@@ -6,17 +6,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import racingcar.vo.CarNames;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CarNamesValidatorTest {
-    private final CarNamesValidator carNamesValidator = new CarNamesValidator();
+class CarNamesTest {
 
     @ParameterizedTest
     @MethodSource("generateData")
     @DisplayName("중복된 자동차 이름이 있으면 중복을 제거하고 출력해준다.")
     void processDuplicatedCars(List<String> inputCarNames, List<String> processedCarNames) {
-        assertThat(carNamesValidator.processDuplicatedCars(inputCarNames))
+        CarNames carNameeVo = new CarNames(inputCarNames);
+        assertThat(carNameeVo.carNames())
                 .isEqualTo(processedCarNames);
     }
 
