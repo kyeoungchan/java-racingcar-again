@@ -1,4 +1,4 @@
-package racingcar.validator;
+package racingcar.vo;
 
 import java.util.List;
 import java.util.Map;
@@ -9,8 +9,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import racingcar.utils.consts.ValueConstants;
 
-public class CarNamesValidator {
-    public List<String> processDuplicatedCars(List<String> carNames) {
+public record CarNames(List<String> carNames) {
+
+    public CarNames(List<String> carNames) {
+        this.carNames = processDuplicatedCars(carNames);
+    }
+
+    private List<String> processDuplicatedCars(List<String> carNames) {
         if (nothingDuplicated(carNames)) {
             return carNames;
         }

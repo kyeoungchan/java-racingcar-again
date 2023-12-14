@@ -28,9 +28,23 @@ public class InputValidator {
         }
     }
 
-    private void validateBlank(String carName) {
-        if (carName == null || carName.length() == 0) {
+    public int parseToInt(String roundData) {
+        validateBlank(roundData);
+        validateOnlyNumber(roundData);
+        return Integer.parseInt(roundData);
+    }
+
+    private void validateBlank(String data) {
+        if (data == null || data.length() == 0) {
             throw InputExceptionCaller.call(ExceptionMessage.BLANK.getMessage());
+        }
+    }
+
+    private void validateOnlyNumber(String roundData) {
+        Pattern p = Pattern.compile(PatternRegex.NUMBER_LEAST_ONE_DIGIT.getValue());
+        Matcher m = p.matcher(roundData);
+        if (!m.matches()) {
+            throw InputExceptionCaller.call(ExceptionMessage.INPUT_ONLY_NUMBER.getMessage());
         }
     }
 }

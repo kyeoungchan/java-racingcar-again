@@ -2,7 +2,8 @@ package racingcar.utils.consts;
 
 public enum PatternRegex {
     END_BY_COMMA(".*,"),
-    SPLITTER(",");
+    SPLITTER(","),
+    NUMBER_LEAST_ONE_DIGIT("\\d+");
 
     private final String value;
 

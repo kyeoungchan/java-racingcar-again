@@ -1,8 +1,9 @@
 package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.List;
 import racingcar.validator.InputValidator;
+import racingcar.vo.CarNames;
+import racingcar.vo.Round;
 
 public class InputView {
     private final OutputView outputView;
@@ -13,9 +14,15 @@ public class InputView {
         this.inputValidator = inputValidator;
     }
 
-    List<String> inputCarNames() {
+    public CarNames inputCarNames() {
         outputView.guidToInputCarNames();
         String carNamesData = Console.readLine();
-        return inputValidator.parseToStrings(carNamesData);
+        return new CarNames(inputValidator.parseToStrings(carNamesData));
+    }
+
+    public Round inputRound() {
+        outputView.guidToInputRound();
+        String roundData = Console.readLine();
+        return new Round(inputValidator.parseToInt(roundData));
     }
 }

@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import racingcar.utils.consts.ExceptionMessage;
-import racingcar.utils.exception.IllegalArgumentExceptionCaller;
 import racingcar.utils.exception.InternalExceptionCaller;
 
 public class SingleRoundPosition {
