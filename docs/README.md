@@ -72,7 +72,7 @@
 2. behavior
    - List<String> getCarNames()
 
-### Rounds
+### Round
 1. status
    - int finalRound
 2. behavior

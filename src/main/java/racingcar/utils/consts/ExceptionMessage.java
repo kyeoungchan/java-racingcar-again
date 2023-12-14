@@ -11,7 +11,8 @@ public enum ExceptionMessage {
     BLANK("공백을 입력할 수 없습니다."),
     NOT_NATURAL_NUMBER("1 이상의 자연수를 입력해주세요!"),
     EXCEEDS_MAXIMUM_ROUND("20 이하의 라운드로 입력해주세요!"),
-    INPUT_ONLY_NUMBER("숫자로만 입력해주시기 바랍니다!");
+    INPUT_ONLY_NUMBER("숫자로만 입력해주시기 바랍니다!"),
+    RETRY(" 다시 입력해주세요.");
 
     private final String message;
 

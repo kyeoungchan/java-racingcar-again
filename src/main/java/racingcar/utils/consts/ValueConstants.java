@@ -6,7 +6,8 @@ public enum ValueConstants {
     MOVE_STANDARD(4),
     NAME_SIZE_LIMIT(5),
     SMALLEST_NATURAL_NUMBER(1),
-    MAXIMUM_ROUND(20);
+    MAXIMUM_ROUND(20),
+    DIGITS_ADDED_COMMA(2);
 
 
     private final int value;
