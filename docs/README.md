@@ -20,9 +20,14 @@
    - int position
 2. behavior
    - void validateName(String name)
-   - CarInfo playOneRound(int round)
-   - boolean ifMoved()
+   - CarInfo playOneRound(int round, boolean movingStatus)
    - CarInfo generateCarInfo(int round)
+
+### RandomEngine
+1. status
+2. behavior
+   - boolean ifMove()
+   - int generateEngine()
 
 ### CarInfo
 1. status

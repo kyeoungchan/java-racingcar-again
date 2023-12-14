@@ -1,7 +1,5 @@
 package racingcar.service.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import racingcar.utils.consts.ValueConstants;
 import racingcar.vo.CarInfo;
 
 public class Car {
@@ -18,19 +16,11 @@ public class Car {
 
     }
 
-    public CarInfo playOneRound(int round) {
-        if (ifMoved()) {
+    public CarInfo playOneRound(int round, boolean movingStatus) {
+        if (movingStatus) {
             position++;
         }
         return generateCarInfo(round);
-    }
-
-    private boolean ifMoved() {
-        int randomNumber = Randoms.pickNumberInRange(
-                ValueConstants.START_INCLUSIVE.getValue(),
-                ValueConstants.END_INCLUSIVE.getValue()
-        );
-        return randomNumber >= ValueConstants.MOVE_STANDARD.getValue();
     }
 
     private CarInfo generateCarInfo(int round) {
