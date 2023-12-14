@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import racingcar.utils.consts.ExceptionMessage;
+import racingcar.validator.InputValidator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,7 +24,7 @@ class InputValidatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateIllegalData")
+    @MethodSource("generateEndByCommaData")
     @DisplayName("쉼표로 끝나면 예외를 발생시킨다.")
     void validateEndByComma(String namesData) {
         assertThatThrownBy(() -> inputValidator.parseToStrings(namesData))
@@ -36,7 +37,21 @@ class InputValidatorTest {
                 .hasMessageContaining(ExceptionMessage.INPUT_THINGS_AFTER_COMMA.getMessage());
     }
 
-    static Stream<Arguments> generateData() {
+    @ParameterizedTest
+    @MethodSource("generateBlankData")
+    @DisplayName("쉼표로 끝나면 예외를 발생시킨다.")
+    void validateBlankData(String namesData) {
+        assertThatThrownBy(() -> inputValidator.parseToStrings(namesData))
+                .isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> inputValidator.parseToStrings(namesData))
+                .hasMessageContaining(ExceptionMessage.PREFIX.getMessage());
+        assertThatThrownBy(() -> inputValidator.parseToStrings(namesData))
+                .hasMessageContaining(ExceptionMessage.INPUT_ERROR.getMessage());
+        assertThatThrownBy(() -> inputValidator.parseToStrings(namesData))
+                .hasMessageContaining(ExceptionMessage.BLANK.getMessage());
+    }
+
+    private static Stream<Arguments> generateData() {
         return Stream.of(
                 Arguments.arguments("aaaa, bbbb, ccc", List.of("aaaa", "bbbb", "ccc")),
                 Arguments.arguments("    aaaa    ,   bbbb  , ccc ", List.of("aaaa", "bbbb", "ccc")),
@@ -44,11 +59,21 @@ class InputValidatorTest {
         );
     }
 
-    static Stream<Arguments> generateIllegalData() {
+    private static Stream<Arguments> generateEndByCommaData() {
         return Stream.of(
                 Arguments.arguments("aaaa, bbbb,"),
                 Arguments.arguments("    aaaa    ,   bbbb  , "),
-                Arguments.arguments("aa aa , bb bb ,    ")
+                Arguments.arguments("aa aa , bb bb ,    "),
+                Arguments.arguments("aa aa ,  ,    ")
+        );
+    }
+
+    private static Stream<Arguments> generateBlankData() {
+        return Stream.of(
+                Arguments.arguments(", bbbb"),
+                Arguments.arguments("    aaaa    ,   ,bbbb  "),
+                Arguments.arguments("aa aa , bb bb ,   cccc, ,ddd "),
+                Arguments.arguments(", , aa aa")
         );
     }
 }

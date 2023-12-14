@@ -21,7 +21,7 @@ class WinnersCalculatorTest {
         Assertions.assertThat(calculatedWinners).isEqualTo(winners);
     }
 
-    static Stream<Arguments> generateData() {
+    private static Stream<Arguments> generateData() {
         return Stream.of(
                 Arguments.arguments(generateResultPosition(
                         List.of("pobi", "kyeou", "hihi"),
@@ -50,15 +50,4 @@ class WinnersCalculatorTest {
         }
         return resultPosition;
     }
-/*
-    static Stream<Arguments> lottoNumbersAndRank() {
-        return Stream.of(
-                Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)), Rank.FIRST),
-                Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)), Rank.SECOND),
-                Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 5, 9)), Rank.THIRD),
-                Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 9, 10)), Rank.FOURTH),
-                Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
-                Arguments.arguments(new Lotto(givenNumbers(1, 2, 8, 9, 10, 11)), Rank.NONE)
-        );
-*/
 }
