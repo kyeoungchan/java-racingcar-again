@@ -3,7 +3,8 @@ package racingcar.utils.consts;
 public enum ValueConstants {
     START_INCLUSIVE(0),
     END_INCLUSIVE(9),
-    MOVE_STANDARD(4);
+    MOVE_STANDARD(4),
+    NAME_SIZE_LIMIT(5);
 
 
     private final int value;
